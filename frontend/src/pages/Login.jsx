@@ -1,14 +1,34 @@
-import React, { useState } from "react";
-// import { toast } from "react-toastify";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
+import { login, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
+
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [alert, setAlert] = useState(null);
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (user || isSuccess) {
+      navigate("/");
+    }
+    dispatch(reset());
+  }, [isError, isSuccess, user, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -18,13 +38,17 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // if (password !== password2) {
-    //   setAlert(true);
-    //   setTimeout(() => {
-    //     setAlert(false);
-    //   }, 3000);
-    // }
+    const userData = {
+      email,
+      password,
+    };
+    dispatch(login(userData));
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <section className="heading">
@@ -62,8 +86,6 @@ function Login() {
               required
             />
           </div>
-
-          {alert ? <p>Password Didn't match</p> : ""}
 
           <div className="form-group">
             <button className="btn btn-block">Submit</button>
