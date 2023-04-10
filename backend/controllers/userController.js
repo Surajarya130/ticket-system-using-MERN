@@ -87,7 +87,7 @@ const getMe = asyncHandler(async (req, res) => {
   // res.send(req.user.id);
 
   const user = {
-    id: req.user._id,
+    id: req.user.id,
     email: req.user.email,
     name: req.user.name,
   };

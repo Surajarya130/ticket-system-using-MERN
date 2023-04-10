@@ -22,7 +22,6 @@ function Register() {
     (state) => state.auth
   );
 
-  console.log(formData);
   const [alert, setAlert] = useState(null);
 
   useEffect(() => {

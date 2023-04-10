@@ -33,4 +33,6 @@ const userSchema = new mongoose.Schema(
 // Users is named for mongoose model
 // const user = mongoose.model("Users", userSchema);
 // module.exports = user;
+
+// "User" is collection with Users
 module.exports = mongoose.model("User", userSchema);
