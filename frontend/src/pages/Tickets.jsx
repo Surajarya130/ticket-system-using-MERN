@@ -16,7 +16,7 @@ function Tickets() {
   useEffect(() => {
     return () => {
       if (isSuccess) {
-        disptach(reset);
+        disptach(reset());
       }
     };
   }, [disptach, isSuccess]);
