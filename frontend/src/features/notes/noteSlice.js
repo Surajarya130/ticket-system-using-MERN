@@ -25,7 +25,6 @@ export const getNotes = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -47,7 +46,6 @@ export const createNote = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }

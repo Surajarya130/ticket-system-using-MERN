@@ -26,8 +26,6 @@ export const createTicket = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
-
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -49,7 +47,6 @@ export const getTickets = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -71,7 +68,6 @@ export const getTicket = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -93,7 +89,6 @@ export const closeTicket = createAsyncThunk(
         error.message ||
         error.toString();
 
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -116,7 +111,6 @@ export const ticketSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(createTicket.rejected, (state, action) => {
-        console.log("action", action);
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

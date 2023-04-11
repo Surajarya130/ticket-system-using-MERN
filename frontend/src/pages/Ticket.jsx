@@ -46,8 +46,6 @@ function Ticket() {
   const dispatch = useDispatch();
   const { ticketId } = useParams();
 
-  console.log(ticketId);
-
   useEffect(() => {
     if (isError) {
       toast.error(message);
