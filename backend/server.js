@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const colors = require("colors");
 const dotenv = require("dotenv").config();
@@ -23,7 +24,19 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/tickets", ticketRouter);
 
-app.use(errorHandler);
+// serve front-end
+if (process.env.NODE_ENV === "production") {
+  // set the build folder in static
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(__dirname, "../", "frontend", "build", "index.html")
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.status(200).json({ msg: "Hello World from ticket system api" });
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
