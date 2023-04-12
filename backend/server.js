@@ -16,10 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 
 const PORT = process.env.PORT || 8000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
 // Routes
 app.use("/api/users", userRouter);
 app.use("/api/tickets", ticketRouter);
